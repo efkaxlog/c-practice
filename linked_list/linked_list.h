@@ -34,4 +34,17 @@ void push_front(LinkedList *list, int data);
 // inserts a new Node at the back of the list
 void push_back(LinkedList *list, int data);
 
+// returns the number of nodes in a list
+int size(LinkedList *list);
+
+// checks whether list is empty
+int empty(LinkedList *list);
+
+// returns data variable from Node struct at an index from the list
+// does not have any out of bounds error checks
+// returns -1 if bad index (very bad, fix later)
+int value_at(LinkedList *list, int index);
+
+
+
 #endif // LINKED_LIST_H

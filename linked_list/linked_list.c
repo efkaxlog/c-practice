@@ -59,3 +59,32 @@ void push_back(LinkedList *list, int data) {
         list->tail = new_node;
     }
 }
+
+int size(LinkedList *list) {
+    int size = 0;
+    Node *node = list->head;
+    while (node) {
+        size++;
+        node = node->next;
+    }
+    return size;
+}
+
+int empty(LinkedList *list) {
+    return !list->head;
+}
+
+int value_at(LinkedList *list, int index) {
+    Node *node = list->head;
+    int i = 0;
+    while (node && i <= index) {
+        if (i == index) {
+            return node->data;
+        }
+        node = node->next;
+        i++;
+    }
+    return -1;
+}
+
+

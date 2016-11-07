@@ -8,6 +8,9 @@ void run_all_tests() {
     test_new_list();
     test_push_front();
     test_push_back();
+    test_size();
+    test_empty();
+    test_value_at();
 }
 
 void test_new_list() {
@@ -36,5 +39,32 @@ void test_push_back() {
     assert(list->head->data == 1);
     assert(list->head->next->data == 2);
     assert(list->tail->data == 3);
+    destroy_list(list);
+}
+
+void test_size() {
+    LinkedList *list = new_list();
+    int nodes = 10;
+    for (int i=0; i<nodes; i++) {
+        push_back(list, i);
+    }
+    assert(size(list) == 10);
+    destroy_list(list);
+}
+
+void test_empty() {
+    LinkedList *list = new_list();
+    assert(empty(list) == 1);
+    destroy_list(list);
+}
+
+void test_value_at() {
+    LinkedList *list = new_list();
+    push_back(list, 5);
+    push_back(list, 10);
+    push_back(list, 15);
+    assert(value_at(list, 0) == 5);
+    assert(value_at(list, 1) == 10);
+    assert(value_at(list, 2) == 15);
     destroy_list(list);
 }
