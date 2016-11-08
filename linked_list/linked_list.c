@@ -87,4 +87,27 @@ int value_at(LinkedList *list, int index) {
     return -1;
 }
 
+void insert(LinkedList *list, int index, int value) {
+    Node *new_node = Node_new(value);
+    Node *current = list->head;
 
+    if (index == 0) {
+        push_front(list, value);
+        return;
+    }
+
+    int i = 0;
+    while (current) {
+        if (index - i == 1) {
+            new_node->next = current->next;
+            current->next = new_node;
+            if (!new_node->next) {
+                list->tail = new_node;
+            }
+            break;
+        }
+        current = current->next;
+        i++;
+    }
+    // if got here index was larger than nodes in list
+}

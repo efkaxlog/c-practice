@@ -45,6 +45,8 @@ int empty(LinkedList *list);
 // returns -1 if bad index (very bad, fix later)
 int value_at(LinkedList *list, int index);
 
+// insert a new node at index
+void insert(LinkedList *list, int index, int value);
 
 
 #endif // LINKED_LIST_H

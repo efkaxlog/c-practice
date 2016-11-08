@@ -8,6 +8,6 @@ void test_push_back();
 void test_size();
 void test_empty();
 void test_value_at();
-
+void test_insert();
 
 #endif // TEST_H

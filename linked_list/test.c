@@ -11,6 +11,7 @@ void run_all_tests() {
     test_size();
     test_empty();
     test_value_at();
+    test_insert();
 }
 
 void test_new_list() {
@@ -66,5 +67,20 @@ void test_value_at() {
     assert(value_at(list, 0) == 5);
     assert(value_at(list, 1) == 10);
     assert(value_at(list, 2) == 15);
+    destroy_list(list);
+}
+
+void test_insert() {
+    LinkedList *list = new_list();
+    insert(list, 0, 0);
+    assert(list->head->data == 0);
+    assert(list->tail->data == 0);
+    insert(list, 0, 1);
+    assert(list->head->data == 1);
+    assert(list->tail->data == 0);
+    insert(list, 1, 2);
+    assert(list->head->data == 1);
+    assert(value_at(list, 1) == 2);
+    assert(list->tail->data == 0);
     destroy_list(list);
 }
