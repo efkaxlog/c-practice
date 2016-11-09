@@ -41,7 +41,6 @@ int size(LinkedList *list);
 int empty(LinkedList *list);
 
 // returns data variable from Node struct at an index from the list
-// does not have any out of bounds error checks
 // returns -1 if bad index (very bad, fix later)
 int value_at(LinkedList *list, int index);
 
@@ -56,5 +55,20 @@ int pop_front(LinkedList *list);
 
 // removes back node (tail) and returns its value or -1 if it doesn't exist.
 int pop_back(LinkedList *list);
+
+// gets front value (head->data), returns -1 if list empty;
+int front_value(LinkedList *list);
+
+// gets back value (tail->data), returns -1 if list empty;
+int back_value(LinkedList *list);
+
+// removes first node with this value from the list
+void remove_value(LinkedList *list, int value);
+
+// returns the value of nth node from the back, -1 if out of bounds
+int value_n_from_end(LinkedList *list, int index);
+
+// reverses the list
+void reverse(LinkedList **list);
 
 #endif // LINKED_LIST_H

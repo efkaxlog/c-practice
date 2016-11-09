@@ -15,6 +15,11 @@ void run_all_tests() {
     test_remove_node();
     test_pop_front();
     test_pop_back();
+    test_front_value();
+    test_back_value();
+    test_remove_value();
+    test_value_n_from_end();
+    test_reverse();
 }
 
 void test_new_list() {
@@ -75,16 +80,13 @@ void test_value_at() {
 
 void test_insert() {
     LinkedList *list = new_list();
-    insert(list, 0, 0);
-    assert(list->head->data == 0);
-    assert(list->tail->data == 0);
     insert(list, 0, 1);
     assert(list->head->data == 1);
-    assert(list->tail->data == 0);
+    assert(list->tail->data == 1);
     insert(list, 1, 2);
     assert(list->head->data == 1);
     assert(value_at(list, 1) == 2);
-    assert(list->tail->data == 0);
+    assert(list->tail->data == 2);
     destroy_list(list);
 }
 
@@ -104,6 +106,7 @@ void test_remove_node() {
     assert(list->head->data == 2);
     assert(list->tail->data == 4);
     assert(size(list) == 2);
+    destroy_list(list);
 }
 
 void test_pop_front() {
@@ -122,6 +125,7 @@ void test_pop_front() {
     assert(value_at(list, 0) == 2);
     assert(list->head->data == 2);
     assert(pop_front(list) == 2);
+    destroy_list(list);
 }
 
 void test_pop_back() {
@@ -141,4 +145,58 @@ void test_pop_back() {
     assert(list->head->data == 1);
     assert(list->tail->data == 1);
     assert(pop_front(list) == 1);
+    destroy_list(list);
+}
+
+void test_front_value() {
+    LinkedList *list = new_list();
+    assert(front_value(list) == -1);
+    push_back(list, 1);
+    assert(front_value(list) == 1);
+    destroy_list(list);
+}
+
+void test_back_value() {
+    LinkedList *list = new_list();
+    assert(back_value(list) == -1);
+    push_back(list, 1);
+    assert(back_value(list) == 1);
+    destroy_list(list);
+}
+
+void test_remove_value() {
+    LinkedList *list = new_list();
+    for (int i=1; i<6; i++) {
+        push_back(list, i);
+    }
+    remove_value(list, 1);
+    assert(list->head->data == 2);
+    remove_value(list, 5);
+    assert(list->tail->data == 4);
+    remove_value(list, 3);
+    assert(list->head->next == list->tail);
+    destroy_list(list);
+}
+
+void test_value_n_from_end() {
+    LinkedList *list = new_list();
+    for (int i=1; i<11; i++) {
+        push_back(list, i);
+    }
+    assert(value_n_from_end(list, 9) == list->head->data);
+    assert(value_n_from_end(list, 0) == list->tail->data);
+    assert(value_n_from_end(list, 1) == 9);
+    assert(value_n_from_end(list, 5) == 5);
+    destroy_list(list);
+}
+
+void test_reverse() {
+    LinkedList *list = new_list();
+    for (int i=0; i<10; i++) {
+        push_back(list, i);
+    }
+    reverse(&list);
+    assert(list->head->data == 9);
+    assert(list->tail->data == 0);
+    destroy_list(list);
 }

@@ -12,5 +12,10 @@ void test_insert();
 void test_remove_node();
 void test_pop_front();
 void test_pop_back();
+void test_front_value();
+void test_back_value();
+void test_remove_value();
+void test_value_n_from_end();
+void test_reverse();
 
 #endif // TEST_H

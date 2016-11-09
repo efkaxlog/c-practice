@@ -90,12 +90,12 @@ int value_at(LinkedList *list, int index) {
 }
 
 void insert(LinkedList *list, int index, int value) {
-    Node *new_node = Node_new(value);
     Node *current = list->head;
     if (index == 0) {
         push_front(list, value);
         return;
     }
+    Node *new_node = Node_new(value);
     int i = 0;
     while (current) {
         if (index - i == 1) {
@@ -174,4 +174,47 @@ int pop_back(LinkedList *list) {
         return data;
     }
     return -1;
+}
+
+int front_value(LinkedList *list) {
+    if (list->head) {
+        return list->head->data;
+    }
+    return -1;
+}
+
+int back_value(LinkedList *list) {
+    if (list->tail) {
+        return list->tail->data;
+    }
+    return -1;
+}
+
+void remove_value(LinkedList *list, int value) {
+    Node *node = list->head;
+    int i = 0;
+    while (node) {
+        if (node->data == value) {
+            remove_node(list, i);
+            return;
+        }
+        node = node->next;
+        i++;
+    }
+}
+
+int value_n_from_end(LinkedList *list, int index) {
+    int real_index = (size(list) - 1) - index;
+    return value_at(list, real_index);
+}
+
+void reverse(LinkedList **list) {
+    LinkedList *reversed = new_list();
+    Node *node = (*list)->head;
+    while (node) {
+        push_front(reversed, node->data);
+        node = node->next;
+    }
+    destroy_list(*list);
+    *list = reversed;
 }
