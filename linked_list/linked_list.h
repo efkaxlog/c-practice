@@ -48,5 +48,13 @@ int value_at(LinkedList *list, int index);
 // insert a new node at index
 void insert(LinkedList *list, int index, int value);
 
+// removes a node at index from list
+void remove_node(LinkedList *list, int index);
+
+// removes front node (head) and returns its value or -1 if it doesn't exist.
+int pop_front(LinkedList *list);
+
+// removes back node (tail) and returns its value or -1 if it doesn't exist.
+int pop_back(LinkedList *list);
 
 #endif // LINKED_LIST_H

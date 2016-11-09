@@ -5,6 +5,7 @@
 Node* Node_new(int data) {                
     Node *new_node = malloc(sizeof(Node));
     new_node->data = data;                
+    new_node->next = 0;
     return new_node;                      
 }                                         
 
@@ -37,6 +38,7 @@ void print_list(LinkedList *list) {
         printf("%d ", node->data);
         node = node->next;
     }
+    printf("\n");
 }
 
 void push_front(LinkedList *list, int data) {
@@ -90,12 +92,10 @@ int value_at(LinkedList *list, int index) {
 void insert(LinkedList *list, int index, int value) {
     Node *new_node = Node_new(value);
     Node *current = list->head;
-
     if (index == 0) {
         push_front(list, value);
         return;
     }
-
     int i = 0;
     while (current) {
         if (index - i == 1) {
@@ -104,10 +104,74 @@ void insert(LinkedList *list, int index, int value) {
             if (!new_node->next) {
                 list->tail = new_node;
             }
-            break;
+            return;
         }
         current = current->next;
         i++;
     }
     // if got here index was larger than nodes in list
+}
+
+void remove_node(LinkedList *list, int index) {
+    if (empty(list)) {
+        return;
+    }
+    Node *current = list->head;
+    if (index == 0 && current) {
+        if (current == list->tail) {
+            list->tail = 0;
+        }   
+        list->head = current->next;
+        free(current);
+        return;
+    }
+    int i = 0;
+    while (current) {
+        if (index - i == 1) {
+            Node *next = current->next;
+            if (next == list->tail) {
+                free(list->tail);
+                current->next = 0;
+                list->tail = current;
+            } else {
+                current->next = next->next;
+                free(next);
+            }
+            return;
+        }
+        current = current->next;
+        i++;
+    }
+}
+
+int pop_front(LinkedList *list) {
+    Node *head = list->head;
+    if (head) {
+        int data = head->data;
+        remove_node(list, 0);
+        return data;
+    }
+    return -1;
+}
+
+int pop_back(LinkedList *list) {
+    Node *tail = list->tail;
+    if (tail) {
+        int data = tail->data;
+        Node *current = list->head;
+        if (current == tail) {
+            remove_node(list, 0);
+            return data;
+        }
+        int i = 0;
+        while (current) {
+            if (current->next == tail) {
+                remove_node(list, i+1);
+            }
+            current = current->next;
+            i++;
+        }
+        return data;
+    }
+    return -1;
 }
